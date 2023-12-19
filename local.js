@@ -13,6 +13,7 @@ const {
   buildspecOverride,
   computeTypeOverride,
   environmentTypeOverride,
+  commitHashOverride,
   imageOverride,
   imagePullCredentialsTypeOverride,
   envPassthrough,
@@ -41,6 +42,12 @@ const {
     alias: "et",
     describe:
       "A container type for this build that overrides the one specified in the build project.",
+    type: "string",
+  })
+  .option("commit-hash-to-override", {
+    alias: "co",
+    describe:
+      "A commit hash, will be passed to the eventSourceVersion parameter.",
     type: "string",
   })
   .option("image-override", {
@@ -87,6 +94,7 @@ const params = cb.inputs2Parameters({
   buildspecOverride,
   computeTypeOverride,
   environmentTypeOverride,
+  commitHashOverride,
   imageOverride,
   imagePullCredentialsTypeOverride,
   envPassthrough,

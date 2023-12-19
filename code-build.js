@@ -175,10 +175,14 @@ function githubInputs() {
   // There is a complexity here because for pull request
   // the GITHUB_SHA value is NOT the correct value.
   // See: https://github.com/aws-actions/aws-codebuild-run-build/issues/36
-  const sourceVersion =
+  const eventSourceVersion =
     process.env[`GITHUB_EVENT_NAME`] === "pull_request"
       ? (((payload || {}).pull_request || {}).head || {}).sha
       : process.env[`GITHUB_SHA`];
+
+  const overrideSourceVersion = core.getInput("commit-hash-to-override", { required: false }) || undefined;
+
+  const sourceVersion = hashOverride !== undefined ? overrideSourceVersion : eventSourceVersion;
 
   assert(sourceVersion, "No source version could be evaluated.");
   const buildspecOverride =
