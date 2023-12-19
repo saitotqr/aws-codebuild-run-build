@@ -182,7 +182,7 @@ function githubInputs() {
 
   const overrideSourceVersion = core.getInput("commit-hash-to-override", { required: false }) || undefined;
 
-  const sourceVersion = hashOverride !== undefined ? overrideSourceVersion : eventSourceVersion;
+  const sourceVersion = overrideSourceVersion !== undefined ? overrideSourceVersion : eventSourceVersion;
 
   assert(sourceVersion, "No source version could be evaluated.");
   const buildspecOverride =
